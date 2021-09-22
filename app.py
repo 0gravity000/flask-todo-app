@@ -15,7 +15,8 @@ class Post(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        posts = Post.query.all()
+        posts = Post.query.order_by(Post.due).all()    # 昇順
+        # posts = Post.query.order_by(Post.due.desc())    # 降順
         return render_template('index.html', posts=posts)
 
     else:
